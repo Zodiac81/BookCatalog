@@ -4,9 +4,6 @@
 To run app just follow this few steps:
 
 - in root directory run  - composer install
-- in root directory run < make build > in command line. This will download and install postgresql image via docker.
-- run docker container with < make up >
-- run Laravel artisan command to run migrations & seeds  -   php artisan migrate:fresh --seed. Test database is ready.
 - create .env file and replace db connection section by these lines:
   <br>
   DB_CONNECTION=pgsql<br>
@@ -15,8 +12,12 @@ To run app just follow this few steps:
   DB_DATABASE=book_catalog<br>
   DB_USERNAME=root<br>
   DB_PASSWORD=<br>
-- also add L5_SWAGGER_CONST_HOST=http://127.0.0.1:8000/api/v1 for correct work of api doc  (look needed constants in .env.example) 
-- run app  -  php artisan config:cache  
+- also add L5_SWAGGER_CONST_HOST=http://127.0.0.1:8000/api/v1 for correct work of api doc  (look needed constants in .env.example)
+- run app  -  php artisan config:cache
+- in root directory run < make build > in command line. This will download and install postgresql image via docker.
+- run docker container with < make up >
+- run Laravel artisan command to run migrations & seeds  -   php artisan migrate:fresh --seed. Test database is ready.
+
 - run app  -  php artisan serve
  
 
