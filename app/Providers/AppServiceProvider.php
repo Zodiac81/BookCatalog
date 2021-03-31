@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IBook::class,  BookService::class);
         $this->app->bind(IRubric::class,  RubricService::class);
         $this->app->bind(IAuthor::class,  AuthorService::class);
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
     /**

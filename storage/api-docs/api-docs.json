@@ -1,0 +1,886 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Book Catalog API Documentation",
+        "description": "Laravel Book Catalog API Documentation",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/v1",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/authors": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get list of authors",
+                "description": "Returns list of authors",
+                "operationId": "getAuthorsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Store new author",
+                "description": "Returns author data",
+                "operationId": "storeAuthor",
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAuthorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        },
+        "/authors/{id}": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get author information",
+                "description": "Returns author data",
+                "operationId": "getAuthorById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Delete author",
+                "description": "Delete author",
+                "operationId": "deleteAuthor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Edit author",
+                "description": "Returns edited author data",
+                "operationId": "editAuthor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAuthorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        },
+        "/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get list of books",
+                "description": "Returns list of books",
+                "operationId": "getBooksList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Store new book",
+                "description": "Returns book data",
+                "operationId": "storeBook",
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        },
+        "/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book information",
+                "description": "Returns book data",
+                "operationId": "getBookById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete book",
+                "description": "Delete book",
+                "operationId": "deleteBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Edit book",
+                "description": "Returns edited book data",
+                "operationId": "editBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreBookRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        },
+        "/rubrics": {
+            "get": {
+                "tags": [
+                    "Rubrics"
+                ],
+                "summary": "Get list of rubrics",
+                "description": "Returns list of rubrics",
+                "operationId": "getRubricsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Rubrics"
+                ],
+                "summary": "Store new rubric",
+                "description": "Returns rubric data",
+                "operationId": "storeRubric",
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRubricRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        },
+        "/rubrics/{id}": {
+            "get": {
+                "tags": [
+                    "Rubrics"
+                ],
+                "summary": "Get rubric information",
+                "description": "Returns rubric data",
+                "operationId": "getRubricById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rubric id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Rubrics"
+                ],
+                "summary": "Delete rubric",
+                "description": "Delete rubric",
+                "operationId": "deleteRubric",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rubric id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Rubrics"
+                ],
+                "summary": "Edit rubric",
+                "description": "Returns edited rubric data",
+                "operationId": "editRubric",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rubric id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data packet for Test",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRubricRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Author": {
+                "title": "Author",
+                "description": "Author model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "Author`s name",
+                        "type": "string",
+                        "example": "Bob"
+                    },
+                    "last_name": {
+                        "title": "last_name",
+                        "description": "Author`s surname",
+                        "type": "string",
+                        "example": "Marley"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Author"
+                }
+            },
+            "Book": {
+                "title": "Book",
+                "description": "Book model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "title",
+                        "description": "Title of the new book",
+                        "type": "string",
+                        "example": "A nice new book"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Book"
+                }
+            },
+            "Rubric": {
+                "title": "Rubric",
+                "description": "Rubric model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Rubric`s name",
+                        "type": "string",
+                        "example": "Rubric 5"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Rubric"
+                }
+            },
+            "StoreAuthorRequest": {
+                "title": "StoreAuthorRequest",
+                "description": "Store author request body data",
+                "required": [
+                    "last_name"
+                ],
+                "properties": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "Author`s name",
+                        "type": "string",
+                        "items": {
+                            "type": "string",
+                            "items": {}
+                        },
+                        "example": "Bob"
+                    },
+                    "last_name": {
+                        "title": "last_name",
+                        "description": "Author`s surname",
+                        "type": "string",
+                        "items": {
+                            "type": "string",
+                            "items": {}
+                        },
+                        "example": "Marley"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreBookRequest": {
+                "title": "StoreBookRequest",
+                "description": "Store Book request body data",
+                "required": [
+                    "rubrics"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "title",
+                        "description": "Title of the new project",
+                        "type": "string",
+                        "example": "A nice new book"
+                    },
+                    "authors": {
+                        "title": "authors",
+                        "description": "Author(s) of the new book",
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "example": "[1,4]"
+                    },
+                    "rubrics": {
+                        "title": "rubrics",
+                        "description": "Rubric(s) of the new book",
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "example": "[2]"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreRubricRequest": {
+                "title": "StoreRubricRequest",
+                "description": "Store rubric request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Rubric`s name",
+                        "type": "string",
+                        "items": {
+                            "type": "string",
+                            "items": {}
+                        },
+                        "example": "Rubric 5"
+                    }
+                },
+                "type": "object"
+            },
+            "SingleAuthorResource": {
+                "title": "SingleAuthorResource",
+                "description": "Single author resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Author"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "SingleAuthorResource"
+                }
+            },
+            "SingleBookResource": {
+                "title": "SingleBookResource",
+                "description": "Single book resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Book"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "SingleBookResource"
+                }
+            },
+            "SingleRubricResource": {
+                "title": "SingleRubricResource",
+                "description": "Single rubric resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Rubric"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "SingleRubricResource"
+                }
+            }
+        },
+        "securitySchemes": {
+            "api_key_security": {
+                "type": "apiKey",
+                "description": " Enter api_token in format < Bearer your_token>",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "API Endpoints of Books"
+        },
+        {
+            "name": "Authors",
+            "description": "API Endpoints of Authors"
+        },
+        {
+            "name": "Rubrics",
+            "description": "API Endpoints of Rubrics"
+        }
+    ],
+    "security": [
+        {
+            "api_key_security": []
+        }
+    ]
+}

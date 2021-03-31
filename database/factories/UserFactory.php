@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'name' => 'Admin',
             'email' => $this->faker->unique()->safeEmail,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'api_token' => Hash::make('api_token')
+            'api_token' => '$2y$10$rC6PgrW/E0i/QXmdRgvDeeZlzLGYl9dzT5IZN749dPxJaUc9BOnzO'
         ];
     }
 

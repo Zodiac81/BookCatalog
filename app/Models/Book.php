@@ -12,6 +12,7 @@ class Book extends Model
     protected $fillable = ['title'];
     public $timestamps = false;
 
+
     public function authors()
     {
         return $this->belongsToMany(Author::class, 'authors_books', 'book_id', 'author_id')->distinct();

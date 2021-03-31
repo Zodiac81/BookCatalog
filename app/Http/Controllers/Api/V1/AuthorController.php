@@ -25,6 +25,23 @@ class AuthorController extends BaseApiController
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     *
+     * @OA\Get(
+     *      path="/authors",
+     *      operationId="getAuthorsList",
+     *      tags={"Authors"},
+     *      summary="Get list of authors",
+     *      description="Returns list of authors",
+     *      security={{}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     *     )
      */
     public function index(): JsonResponse
     {
@@ -36,6 +53,39 @@ class AuthorController extends BaseApiController
      *
      * @param StoreAuthorRequest $request
      * @return JsonResponse
+     *
+     * @OAS\SecurityScheme(
+     *      securityScheme="api_key_security",
+     *      type="http",
+     *      scheme="bearer"
+     * )
+     * @OA\Post(
+     *      path="/authors",
+     *      operationId="storeAuthor",
+     *      tags={"Authors"},
+     *      summary="Store new author",
+     *      description="Returns author data",
+     *      security={{"api_key_security":{}}},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description = "Data packet for Test",
+     *          @OA\JsonContent(ref="#/components/schemas/StoreAuthorRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *         @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *          @OA\JsonContent()
+     *      )
+     * )
      */
     public function store(StoreAuthorRequest $request): JsonResponse
     {
@@ -51,6 +101,36 @@ class AuthorController extends BaseApiController
      *
      * @param Author $author
      * @return JsonResponse
+     *
+     * @OA\Get(
+     *      path="/authors/{id}",
+     *      operationId="getAuthorById",
+     *      tags={"Authors"},
+     *      summary="Get author information",
+     *      description="Returns author data",
+     *      security={{}},
+     * @OA\Parameter(
+     *          name="id",
+     *          description="Author id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     * )
      */
     public function show(Author $author): JsonResponse
     {
@@ -63,6 +143,48 @@ class AuthorController extends BaseApiController
      * @param Request $request
      * @param Author $author
      * @return JsonResponse
+     *
+     * @OAS\SecurityScheme(
+     *      securityScheme="api_key_security",
+     *      type="http",
+     *      scheme="bearer"
+     * )
+     * @OA\Patch(
+     *      path="/authors/{id}",
+     *      operationId="editAuthor",
+     *      tags={"Authors"},
+     *      summary="Edit author",
+     *      description="Returns edited author data",
+     *      security={{"api_key_security":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="Author id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description = "Data packet for Test",
+     *          @OA\JsonContent(ref="#/components/schemas/StoreAuthorRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Accepted",
+     *         @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *          @OA\JsonContent()
+     *      )
+     * )
      */
     public function update(Request $request, Author $author): JsonResponse
     {
@@ -78,6 +200,43 @@ class AuthorController extends BaseApiController
      *
      * @param Author $author
      * @return JsonResponse
+     *
+     * @OAS\SecurityScheme(
+     *      securityScheme="api_key_security",
+     *      type="http",
+     *      scheme="bearer"
+     * )
+     * @OA\Delete(
+     *      path="/authors/{id}",
+     *      operationId="deleteAuthor",
+     *      tags={"Authors"},
+     *      summary="Delete author",
+     *      description="Delete author",
+     *      security={{"api_key_security":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="Author id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="No Content",
+     *         @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *          @OA\JsonContent()
+     *      )
+     * )
      */
     public function destroy(Author $author): JsonResponse
     {
