@@ -15,6 +15,7 @@ class SingleRubricResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => (int) $this->id,
             'name' => (string) $this->name,
             'books' => BookResource::collection($this->books)
         ];

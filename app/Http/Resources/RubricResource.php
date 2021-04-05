@@ -16,6 +16,7 @@ class RubricResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' => (int) $this->id,
             'name' => (string) $this->name
         ];
     }

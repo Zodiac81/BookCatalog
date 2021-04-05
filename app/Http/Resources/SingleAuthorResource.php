@@ -15,6 +15,7 @@ class SingleAuthorResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => (int) $this->id,
             'first_name' => (string) $this->first_name,
             'last_name' => (string) $this->last_name,
             'books' => BookResource::collection($this->books)
