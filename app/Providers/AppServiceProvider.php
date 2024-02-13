@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Contracts\CRUDInterface;
+use App\Contracts\RepositoryInterface;
+use App\Repositories\BaseApiRepository;
 use App\Services\Author\AuthorService;
 use App\Services\Author\IAuthor;
+use App\Services\BaseApiService;
 use App\Services\Book\BookService;
 use App\Services\Book\IBook;
 use App\Services\Rubric\IRubric;
@@ -20,9 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(IBook::class,  BookService::class);
-        $this->app->bind(IRubric::class,  RubricService::class);
-        $this->app->bind(IAuthor::class,  AuthorService::class);
+//        $this->app->bind(CRUDInterface::class,  BaseApiService::class);
+        $this->app->bind(RepositoryInterface::class,  BaseApiRepository::class);
+//        $this->app->bind(IBook::class,  BookService::class);
+//        $this->app->bind(IRubric::class,  RubricService::class);
+//        $this->app->bind(IAuthor::class,  AuthorService::class);
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 

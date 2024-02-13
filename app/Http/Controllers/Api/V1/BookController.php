@@ -6,21 +6,22 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\SingleBookResource;
+use App\Contracts\CRUDInterface;
 use App\Models\Book;
-use App\Services\Book\IBook;
+//use App\Services\Book\IBook;
+use App\Services\BaseApiService;
+use App\Services\Book\BookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-
-
 
 class BookController extends BaseApiController
 {
 
-    protected $bookService;
-
-    public function __construct(IBook $bookService)
+    /**
+     * @param BookService $bookService
+     */
+    public function __construct(protected BookService $bookService)
     {
-        $this->bookService = $bookService;
         $this->middleware( 'auth:api')->except(['index','show']);
     }
 
@@ -48,7 +49,8 @@ class BookController extends BaseApiController
      */
     public function index(): JsonResponse
     {
-        return $this->success(BookResource::collection(Book::getAllWithPaginate()), Response::HTTP_OK);
+        return $this->success(BookResource::collection($this->bookService->getAll()));
+//        return $this->success(BookResource::collection(Book::getAllWithPaginate()), Response::HTTP_OK);
     }
 
     /**
@@ -102,7 +104,7 @@ class BookController extends BaseApiController
     /**
      * Display the specified resource.
      *
-     * @param Book $book
+//     * @param Book $book
      * @return JsonResponse
      * @throws \Exception
      *
@@ -136,16 +138,16 @@ class BookController extends BaseApiController
      *      )
      * )
      */
-    public function show(Book $book): JsonResponse
+    public function show(): JsonResponse
     {
-        return $this->success(new SingleBookResource($book), Response::HTTP_OK);
+//        return $this->success(new SingleBookResource($book), Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param UpdateBookRequest $request
-     * @param Book $book
+//     * @param Book $book
      * @return JsonResponse
      *
      * @OAS\SecurityScheme(
@@ -190,19 +192,19 @@ class BookController extends BaseApiController
      *      )
      * )
      */
-    public function update(UpdateBookRequest $request, Book $book): JsonResponse
+    public function update(UpdateBookRequest $request): JsonResponse
     {
-        $data = $request->only(['title', 'authors', 'rubrics']);
-        $updateBook = $this->bookService->update($data, $book);
-        if ($updateBook) {
-            return $this->success($updateBook, Response::HTTP_ACCEPTED);
-        }
+//        $data = $request->only(['title', 'authors', 'rubrics']);
+//        $updateBook = $this->bookService->update($data, $book);
+//        if ($updateBook) {
+//            return $this->success($updateBook, Response::HTTP_ACCEPTED);
+//        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Book $book
+//     * @param Book $book
      * @return JsonResponse
      * @throws \Exception
      *
@@ -248,10 +250,10 @@ class BookController extends BaseApiController
      *      )
      * )
      */
-    public function destroy(Book $book): JsonResponse
+    public function destroy(): JsonResponse
     {
-        $this->bookService->delete($book);
-        return $this->success(null, Response::HTTP_NO_CONTENT);
+//        $this->bookService->delete($book);
+//        return $this->success(null, Response::HTTP_NO_CONTENT);
     }
 
 }

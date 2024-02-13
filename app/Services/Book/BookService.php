@@ -1,41 +1,18 @@
 <?php
 
-
 namespace App\Services\Book;
 
-use App\Http\Resources\SingleBookResource;
-use App\Models\Book;
+use App\Repositories\BookRepository;
+use App\Services\BaseApiService;
+use Illuminate\Support\Facades\App;
 
-class BookService implements IBook
+class BookService extends BaseApiService
 {
-    public function store(array $data): SingleBookResource
+    /**
+     *
+     */
+    public function __construct()
     {
-        $book = Book::create($data);
-
-        if(!$book){
-            abort(500, 'Could not create a Book');
-        }
-
-        $book->authors()->attach($data['authors']);
-        $book->rubrics()->attach($data['rubrics']);
-
-        return new SingleBookResource($book);
-    }
-
-    public function update(array $data, $book): SingleBookResource
-    {
-        if($book->update($data)) {
-            $book->authors()->sync($data['authors']);
-            $book->rubrics()->sync($data['rubrics']);
-            return new SingleBookResource($book);
-        }
-    }
-
-    public function delete($book): void
-    {
-        if($book->delete()){
-            $book->authors()->detach();
-            $book->rubrics()->detach();
-        }
+        parent::__construct(App::make(BookRepository::class));
     }
 }

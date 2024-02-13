@@ -9,7 +9,14 @@ class Book extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = ['title'];
+
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
 
